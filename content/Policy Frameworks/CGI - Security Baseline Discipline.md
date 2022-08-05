@@ -38,7 +38,7 @@ This policies and guidance in this document has been developed in conjunction wi
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
 
 <html>
-	
+	<body>
 	<b><font color ="07AFBD">Application/Data Management:</font></b>
 	All data must be categorized by criticality and data classification. Applications must be reviewed by the Infostructure team before deployment to endpoints.
 	<br> <br><b><font color ="07AFBD">Network isolation</font></b>
@@ -47,7 +47,7 @@ The following statements should guide cloud adoption architecture decisions to e
 	Company owned data must be isolated from non-company approved applications. Company data being move to external media requires that media to be encrypted.
 	<br><br><b><font color ="07AFBD">Secure on-premises connectivity</font></b>
 	All connections between the on-premises and cloud networks must take place either through a secure encrypted VPN connection or a dedicated private WAN link.
-	
+	</body>
 </html>
 
 ## Business Risks
