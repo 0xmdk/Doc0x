@@ -31,13 +31,9 @@ Cloud deployments face many of the same security risks as workloads hosted in tr
 
 This policies and guidance in this document has been developed in conjunction with the governance best practices documented in the [Microsoft Cloud Adoption Framework for Azure (CAF)](http://aka.ms/caf).
 
-```html
-<span style="color:blue ; background: yellow">blue</span>
-	<h1>Policy Statements</h1>
-
-```
-## Policy Statements
-
+<html>
+	<h1><font color="#92a8d1">Policy Statements</font></h1>
+</html>
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
 
 **Application/Data Management**: All data must be categorized by criticality and data classification. Applications must be reviewed by the Infostructure team before deployment to endpoints.
