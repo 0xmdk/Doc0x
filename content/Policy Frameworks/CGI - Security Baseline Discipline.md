@@ -6,7 +6,7 @@ Policy Statements and Design Guidance
 
 The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
 
-Contents Completion Status
+**Contents Completion Status**
 
  - [x] Summary 
 
@@ -24,7 +24,7 @@ Contents Completion Status
   
  - [ ] Toolchain
 
-##### Executive Summary
+**Executive Summary**
 
 Cloud deployments face many of the same security risks as workloads hosted in traditional on-premises datacenters. However, one of the primary things that set cloud security governance apart from traditional security policy is the ease with which resources can be created, potentially adding vulnerabilities if security isn't considered before deployment. This document identifies and determines the business’s tolerance for risks, and outlines efforts to remediate these risks. The result is a series of policy statements that should guide the architecture of any solutions deployed to the cloud.
 
