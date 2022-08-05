@@ -1,18 +1,10 @@
-## Creative Group Security Framework for Azure/Intune
-
-Security Baseline Discipline
-
-Policy Statements and Design Guidance
-
-The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
-
 **Contents Completion Status**
 
  - [x] Summary 
 
  - [ ] Policy Statements
-
- - [ ] Business Risks
+ 
+ - [ ] Business Risks
 
  - [ ] Metrics and Indicators
   
@@ -23,8 +15,17 @@ The document outlines the policy statements and design guidance required to supp
  - [ ] Violation Triggers and Enforcement
   
  - [ ] Toolchain
+ 
+## Creative Group Security Framework for Azure/Intune
 
-**Executive Summary**
+Security Baseline Discipline
+
+Policy Statements and Design Guidance
+
+The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
+
+
+## Executive Summary
 
 Cloud deployments face many of the same security risks as workloads hosted in traditional on-premises datacenters. However, one of the primary things that set cloud security governance apart from traditional security policy is the ease with which resources can be created, potentially adding vulnerabilities if security isn't considered before deployment. This document identifies and determines the business’s tolerance for risks, and outlines efforts to remediate these risks. The result is a series of policy statements that should guide the architecture of any solutions deployed to the cloud.
 
