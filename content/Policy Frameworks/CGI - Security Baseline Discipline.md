@@ -29,10 +29,6 @@ The document outlines the policy statements and design guidance required to supp
 
 
 
-
-
-
-
 <html>
 	<h1><font color="#92a8d1">Executive Summary</font></h1>
 </html>
