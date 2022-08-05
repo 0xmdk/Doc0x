@@ -6,7 +6,8 @@ Policy Statements and Design Guidance
 
 The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
 
-##### Contents
+##### Contents Completion Status
+
 
 1.       - [ ] Summary 
 
