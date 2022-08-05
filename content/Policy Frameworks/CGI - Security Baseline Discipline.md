@@ -16,13 +16,22 @@
   
  - [ ] Toolchain
  
-## Creative Group Security Framework for Azure/Intune
+# Creative Group Security Framework for Azure/Intune
 
 Security Baseline Discipline
 
 Policy Statements and Design Guidance
 
 The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
+
+
+
+
+
+
+
+
+
 
 <html>
 	<h1><font color="#92a8d1">Executive Summary</font></h1>
