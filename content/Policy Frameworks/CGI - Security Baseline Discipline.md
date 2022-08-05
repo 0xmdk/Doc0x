@@ -46,9 +46,10 @@ The following statements should guide cloud adoption architecture decisions to e
 
 The following security related business risks have been identified as concerns based on the current plans for cloud adoption.
 
-Risk | Description | Indicators | Resolution
+Risk | Description | Indicators | Resolution|
+|-----|--------------|------------|-------------|
+| Data breach | Test Data | Test Data 2 | Test Data 4 |
 
-Data breach
 
 Inadvertent exposure or loss of sensitive cloud-hosted data can lead to losing customers, contractual issues, or legal consequences.
 
