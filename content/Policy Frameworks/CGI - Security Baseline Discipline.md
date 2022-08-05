@@ -44,14 +44,11 @@ The following statements should guide cloud adoption architecture decisions to e
 	<br> <br><b><font color ="07AFBD">Network isolation</font></b>
 	Network subnets containing protected data must be isolated from any other subnets. Network traffic between protected data subnets is to be audited regularly.
 	<br><br><b><font color ="07AFBD">Data isolation</font></b>
+	Company owned data must be isolated from non-company approved applications. Company data being move to external media requires that media to be encrypted.
+	<br><br><b><font color ="07AFBD">Secure on-premises connectivity</font></b>
+	All connections between the on-premises and cloud networks must take place either through a secure encrypted VPN connection or a dedicated private WAN link.
+	
 </html>
-
-
-==**Network isolation**==: Network subnets containing protected data must be isolated from any other subnets. Network traffic between protected data subnets is to be audited regularly.
-
-==**Data isolation:**== Company owned data must be isolated from non-company approved applications. Company data being move to external media requires that media to be encrypted.
-
-==**Secure on-premises connectivity**==: All connections between the on-premises and cloud networks must take place either through a secure encrypted VPN connection or a dedicated private WAN link.
 
 ## Business Risks
 
