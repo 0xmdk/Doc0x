@@ -40,7 +40,7 @@ This policies and guidance in this document has been developed in conjunction wi
 
 ## Policy Statements
 
-The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
+The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the SecuritY Baseline discipline.
 
 <html>
 	<body><p>
