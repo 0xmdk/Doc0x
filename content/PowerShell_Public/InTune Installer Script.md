@@ -6,7 +6,7 @@ title: 🐱‍💻 OxMdk
 
 ###### OpenVPN Example:
 * Step 1: `Place body of code on AWS:`
-```ps
+```powershell
 ## Check for Current Installed Client
 $ovpnapp = Get-Package -Provider Programs -IncludeWindowsInstaller -name "OpenVPN*" -ErrorAction SilentlyContinue
 
