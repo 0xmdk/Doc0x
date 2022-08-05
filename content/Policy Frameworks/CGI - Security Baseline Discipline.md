@@ -9,21 +9,21 @@ The document outlines the policy statements and design guidance required to supp
 ##### Contents Completion Status
 
 
-1.       - [ ] Summary 
+ - [ ] Summary 
 
-2.       - [ ] Policy Statements
+ - [ ] Policy Statements
 
-3.       - [ ] Business Risks
+  - [ ] Business Risks
 
-4.       - [ ] Metrics and Indicators
+  - [ ] Metrics and Indicators
+  
+  - [ ] Policy compliance process
 
-5.       - [ ] Policy compliance process
+  - [ ] Ongoing Monitoring
 
-6.       - [ ] Ongoing Monitoring
-
-7.       - [ ] Violation Triggers and Enforcement
-
-8.       - [ ] Toolchain
+  - [ ] Violation Triggers and Enforcement
+  
+  - [ ] Toolchain
 
 ##### Executive Summary
 
