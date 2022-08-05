@@ -38,16 +38,16 @@ This policies and guidance in this document has been developed in conjunction wi
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
 
 <html>
-	<body>
-	<font color ="07AFBD"><b>Application & Data Management:</b></font>
+	<body><p>
+	<font color ="07AFBD">Application & Data Management:</font>
 	All data must be categorized by criticality and data classification. Applications must be reviewed by the Infostructure team before deployment to endpoints.
-	<br><b><font color ="07AFBD">Network isolation:</font></b>
+	<br><font color ="07AFBD"><b>Network isolation</b>:</font>
 	Network subnets containing protected data must be isolated from any other subnets. Network traffic between protected data subnets is to be audited regularly.
-	<br><b><font color ="07AFBD">Data isolation:</font></b>
+	<br><font color ="07AFBD"><b>Data isolation</b>:</font>
 	Company owned data must be isolated from non-company approved applications. Company data being move to external media requires that media to be encrypted.
-   <br><b><font color ="07AFBD">Secure on-premises connectivity:</font></b>
+   <br><font color ="07AFBD"><b>Secure on-premises connectivity</b>:</font>
 	All connections between the on-premises and cloud networks must take place either through a secure encrypted VPN connection or a dedicated private WAN link.
-	</body>
+	</p></body>
 </html>
 
 ## Business Risks
