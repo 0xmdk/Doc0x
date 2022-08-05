@@ -39,7 +39,7 @@ The following statements should guide cloud adoption architecture decisions to e
 
 <html>
 	<body><p>
-	<font color ="07AFBD">Application & Data Management:</font>
+	<font color ="07AFBD"><b>Application & Data Management</b>:</font>
 	All data must be categorized by criticality and data classification. Applications must be reviewed by the Infostructure team before deployment to endpoints.
 	<br><font color ="07AFBD"><b>Network isolation</b>:</font>
 	Network subnets containing protected data must be isolated from any other subnets. Network traffic between protected data subnets is to be audited regularly.
