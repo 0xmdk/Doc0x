@@ -31,6 +31,12 @@ Cloud deployments face many of the same security risks as workloads hosted in tr
 
 This policies and guidance in this document has been developed in conjunction with the governance best practices documented in the [Microsoft Cloud Adoption Framework for Azure (CAF)](http://aka.ms/caf).
 
+```html
+<body >
+	<font style="color:green">Text Color</font >
+	<h1 >Policy Statements</h1 >
+</body >
+```
 ## Policy Statements
 
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
