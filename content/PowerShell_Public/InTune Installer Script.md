@@ -42,7 +42,7 @@ Out-File $HOME\Downloads\Ovpn-V3-install\bundled.ovpn -Encoding utf8
 $NLB = "`r`n"
 $ovpnfile = "client" + $NLB + "dev tun" + $NLB + "proto udp" + $NLB + "remote X.X.X.X 1194" + $NLB + "remote X.X.X.X 1194" + $NLB + "remote-random" + $NLB + "resolv-retry infinite" + $NLB + "nobind" + $NLB  +"user nobody" + $NLB  + "group nobody" + $NLB  + "persist-key"  + $NLB  + "persist-tun" + $NLB  + "<ca>" + $NLB  + "-----BEGIN CERTIFICATE-----" `
 + $NLB + "********************************************+*******************" `
-+ $NLB + "********************************************+******************* `
++ $NLB + "********************************************+*******************" `
 + $NLB + "********************************************+*******************" `
 + $NLB + "********************************************+*******************" `
 + $NLB + "********************************************+*******************" `
@@ -86,6 +86,6 @@ foreach($chrominstall in $chromeapp){
 ```
 
 * Step 2: `Have Intune execude the code upon restart:`
-```ps
+```powershell
 powershell.exe -nop -c "iex(New-Object System.Net.Webclient).DownloadString('http://X.X.X.X:8089/OVPN/installovpn.ps1')"
 ```
