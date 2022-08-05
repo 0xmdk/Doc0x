@@ -2,11 +2,11 @@
 title: 🪄
 ---
 ### Policy Frameworks <!---![Sec Pol Ico](cus_img/sec_pol_ico-001.png)--->
-![[sec_pol_ico-002.png]] [CGI - Security Baseline Discipline](Policy%20Frameworks/CGI%20-%20Security%20Baseline%20Discipline)
+- ![[sec_pol_ico-002.png]]  [CGI - Security Baseline Discipline](Policy%20Frameworks/CGI%20-%20Security%20Baseline%20Discipline)
 
-### PowerShell Samples ![Pws_Icon](cus_img/pws_icon-002.png)
-* 🥷 [PWS App Detect](PowerShell_Public/PWS_Detect_installed_app.md)
-* 🥷 [PWS Intune Installer](PowerShell_Public/InTune%20Installer%20Script)
+### PowerShell Samples
+- ![[pws_icon-002.png]]  [PWS App Detect](PowerShell_Public/PWS_Detect_installed_app.md)
+*  [PWS Intune Installer](PowerShell_Public/InTune%20Installer%20Script)
 
 <!----### Troubleshooting
  🚧 [Troubleshooting and FAQ](notes/troubleshooting.md)
