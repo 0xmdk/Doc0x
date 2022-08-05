@@ -1,4 +1,4 @@
-# Creative Group Security Framework for Azure/Intune
+## Creative Group Security Framework for Azure/Intune
 
 Security Baseline Discipline
 
@@ -30,7 +30,7 @@ Cloud deployments face many of the same security risks as workloads hosted in tr
 
 This policies and guidance in this document has been developed in conjunction with the governance best practices documented in the [Microsoft Cloud Adoption Framework for Azure (CAF)](http://aka.ms/caf).
 
-# Policy Statements
+## Policy Statements
 
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
 
@@ -42,7 +42,7 @@ The following statements should guide cloud adoption architecture decisions to e
 
 **Secure on-premises connectivity**: All connections between the on-premises and cloud networks must take place either through a secure encrypted VPN connection or a dedicated private WAN link.
 
-# Business Risks
+## Business Risks
 
 The following security related business risks have been identified as concerns based on the current plans for cloud adoption.
 
