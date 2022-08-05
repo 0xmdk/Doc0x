@@ -1,7 +1,7 @@
 ---
 title: 🪄
 ---
-### Policy Frameworks <!---![Sec Pol Ico](cus_img/sec_pol_ico-001.png)--->
+### Policy Frameworks
 - ![[sec_pol_ico-002.png]]  [CGI - Security Baseline Discipline](Policy%20Frameworks/CGI%20-%20Security%20Baseline%20Discipline)
 
 ### PowerShell Samples
