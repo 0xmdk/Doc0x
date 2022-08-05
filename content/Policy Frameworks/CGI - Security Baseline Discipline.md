@@ -24,16 +24,16 @@ Policy Statements and Design Guidance
 
 The document outlines the policy statements and design guidance required to support the Security Baseline governance discipline during cloud adoption.
 
-
-## Executive Summary
-
+<html>
+	<h1><font color="#92a8d1">Executive Summary</font></h1>
+</html>
 Cloud deployments face many of the same security risks as workloads hosted in traditional on-premises datacenters. However, one of the primary things that set cloud security governance apart from traditional security policy is the ease with which resources can be created, potentially adding vulnerabilities if security isn't considered before deployment. This document identifies and determines the business’s tolerance for risks, and outlines efforts to remediate these risks. The result is a series of policy statements that should guide the architecture of any solutions deployed to the cloud.
 
 This policies and guidance in this document has been developed in conjunction with the governance best practices documented in the [Microsoft Cloud Adoption Framework for Azure (CAF)](http://aka.ms/caf).
 
-<html>
-	<h1><font color="#92a8d1">Policy Statements</font></h1>
-</html>
+
+## Policy Statements
+
 The following statements should guide cloud adoption architecture decisions to ensure compliance with governance efforts related to the Security Baseline discipline.
 
 **Application/Data Management**: All data must be categorized by criticality and data classification. Applications must be reviewed by the Infostructure team before deployment to endpoints.
