@@ -6,10 +6,10 @@ title: 🪄
 
 ### PowerShell Samples
 - ![[cus_img/pws_icon-002.png]] [App Detect](PowerShell_Public/PWS_Detect_installed_app.md)
-* ![[cus_img/pws_icon-002.png]] [Intune Installer](PowerShell_Public/InTune%20Installer%20Script)
+- ![[cus_img/pws_icon-002.png]] [Intune Installer](PowerShell_Public/InTune%20Installer%20Script)
 
 ## Bash Samples
-![[cus_img/bash-icon-5.png]] ![[cus_img/greenboneico.png]] [GreenBone & tmux auto start](Bash%20Shell/Greenbone_tmux%20auto%20start)
+- ![[cus_img/bash-icon-5.png]] [GreenBone & tmux auto start](Bash%20Shell/Greenbone_tmux%20auto%20start)
 
 <!----### Troubleshooting
  🚧 [Troubleshooting and FAQ](notes/troubleshooting.md)
