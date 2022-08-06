@@ -1,5 +1,3 @@
-# Get WildCard Cert from Let's Encrypt
-
 ## Get WildCard Cert from Let's Encrypt
 
 ```bash
