@@ -3,7 +3,7 @@ title: 🐱‍💻 OxMdk
 ---
 
 ### Greenbone & Tmux autostart Example:
-```sh
+```bash
 #!/bin/sh
 sudo mkdir /run/gvm/ && sudo chown mdk -R /run/gvm/
 
