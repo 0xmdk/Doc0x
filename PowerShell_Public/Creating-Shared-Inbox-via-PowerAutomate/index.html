@@ -1,0 +1,388 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Create shared inbox in hybrid env with powershell from powerautomate 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185  Invoke-Command -ComputerName &#34;your-DC-here&#34; -ScriptBlock {stop-Service -Name ADSync} Import-Module MSOnline Import-Module ActiveDirectory $admin = &#34;globaladmin-here&#34; $password = ConvertTo-SecureString &#34;admpws-here&#34; -AsPlainText -Force $psCred = New-Object System."><title>Powershell sample</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://0xmdk.github.io/Doc0x//icon.png><link href=https://0xmdk.github.io/Doc0x/styles.b54f56dc7e7fdf6be9a4427dc6b0509b.min.css rel=stylesheet><link href=https://0xmdk.github.io/Doc0x/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://0xmdk.github.io/Doc0x/js/darkmode.ef3aaf404d903b8af496ecf444f5824d.min.js></script>
+<script src=https://0xmdk.github.io/Doc0x/js/util.39f53d45cb9520bdaf946bd063598b19.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://0xmdk.github.io/Doc0x/js/popover.37b1455b8f0603154072b9467132c659.min.js></script>
+<script src=https://0xmdk.github.io/Doc0x/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://0xmdk.github.io/Doc0x/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://0xmdk.github.io/Doc0x/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://0xmdk.github.io/Doc0x/",fetchData=Promise.all([fetch("https://0xmdk.github.io/Doc0x/indices/linkIndex.ba6d18d247d9019167535de10ee2fc8c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://0xmdk.github.io/Doc0x/indices/contentIndex.88ed73749d259357d5a8025a0ab6bfd5.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const n=new URL(BASE_URL),s=n.pathname,o=window.location.pathname,i=s==o;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts();const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=i&&!1;drawGraph("https://0xmdk.github.io/Doc0x",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2}),initPopover("https://0xmdk.github.io/Doc0x",!0,!0)},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/0xmdk.github.io\/Doc0x\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-XYFD95KB4J"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-XYFD95KB4J",{anonymize_ip:!1})}</script><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://0xmdk.github.io/Doc0x/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://0xmdk.github.io/Doc0x/>🪄</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>Powershell sample</h1><p class=meta>Last updated
+Aug 5, 2022</p><ul class=tags></ul><aside class=mainTOC><details open><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><ol><li><a href=#create-shared-inbox-in-hybrid-env-with-powershell-from-powerautomate>Create shared inbox in hybrid env with powershell from powerautomate</a></li></ol></li></ol></nav></details></aside><a href=#create-shared-inbox-in-hybrid-env-with-powershell-from-powerautomate><h3 id=create-shared-inbox-in-hybrid-env-with-powershell-from-powerautomate><span class=hanchor arialabel=Anchor># </span>Create shared inbox in hybrid env with powershell from powerautomate</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=nb>Invoke-Command</span>  <span class=n>-ComputerName</span>  <span class=s2>&#34;your-DC-here&#34;</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span><span class=nb>stop-Service</span>  <span class=n>-Name</span>  <span class=n>ADSync</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Import-Module</span>  <span class=n>MSOnline</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Import-Module</span>  <span class=n>ActiveDirectory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$admin</span>  <span class=p>=</span>  <span class=s2>&#34;globaladmin-here&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$password</span>  <span class=p>=</span>  <span class=nb>ConvertTo-SecureString</span>  <span class=s2>&#34;admpws-here&#34;</span>  <span class=n>-AsPlainText</span>  <span class=n>-Force</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$psCred</span>  <span class=p>=</span>  <span class=nb>New-Object</span>  <span class=n>System</span><span class=p>.</span><span class=n>Management</span><span class=p>.</span><span class=n>Automation</span><span class=p>.</span><span class=n>PSCredential</span>  <span class=n>-ArgumentList</span> <span class=p>(</span><span class=nv>$admin</span><span class=p>,</span>  <span class=nv>$password</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Connect-ExchangeOnline</span>  <span class=n>-Credential</span>  <span class=nv>$psCred</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Connect-MSolService</span>  <span class=n>-Credential</span>  <span class=nv>$psCred</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$PATH</span>  <span class=p>=</span>  <span class=s2>&#34;C:\\Users\\$user\\Desktop\\PowerAutomate\\Mailbox&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$NURF</span>  <span class=p>=</span>  <span class=nb>Get-ChildItem</span>  <span class=n>-Path</span>  <span class=nv>$PATH</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>Foreach</span> <span class=p>(</span><span class=nv>$nurcsv</span>  <span class=k>in</span>  <span class=nv>$NURF</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$NUser</span>  <span class=p>=</span>  <span class=nb>Import-Csv</span>  <span class=nv>$PATH</span><span class=p>\</span><span class=nv>$nurcsv</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>Foreach</span> <span class=p>(</span><span class=nv>$u</span> <span class=k>in</span> <span class=nv>$NUser</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$FirstName</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=n>First</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$DispName</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=n>DisplayName</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$LastName</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=n>Last</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$Alias</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=k>Alias</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$ADLocation</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=n>ADLocation</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$MboxMembers</span> <span class=p>=</span> <span class=nv>$u</span><span class=p>.</span><span class=n>Mboxmember</span><span class=p>,</span><span class=nv>$u</span><span class=p>.</span><span class=n>Addmbxmember1</span><span class=p>,</span><span class=nv>$u</span><span class=p>.</span><span class=n>Addmbxmember2</span><span class=p>,</span><span class=nv>$u</span><span class=p>.</span><span class=n>Addmbxmember3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$emailaddr</span>  <span class=p>=</span>  <span class=s2>&#34;$Alias@creativegroupinc.com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$emailaddr2</span>  <span class=p>=</span>  <span class=s2>&#34;$Alias@creativegroupinc2.mail.onmicrosoft.com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$smtprox</span>  <span class=p>=</span>  <span class=s2>&#34;SMTP:$emailaddr2&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=p>(</span><span class=nv>$adlocation</span>  <span class=o>-eq</span>  <span class=s2>&#34;Client Mailboxes - West&#34;</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$addn</span>  <span class=p>=</span>  <span class=s2>&#34;OU=SFO Service Accounts,OU=SFO,DC=creativegroupinc,DC=com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span><span class=k>elseif</span> <span class=p>(</span><span class=nv>$ADLocation</span>  <span class=o>-eq</span>  <span class=s2>&#34;Client Mailboxes - Central&#34;</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$addn</span>  <span class=p>=</span>  <span class=s2>&#34;OU=Central,OU=Client Mailboxes,DC=creativegroupinc,DC=com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span><span class=k>else</span><span class=p>{</span> <span class=nv>$addn</span>  <span class=p>=</span>  <span class=s2>&#34;OU=Canada,OU=Client Mailboxes,DC=creativegroupinc,DC=com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$ADUserProperties</span>  <span class=p>=</span> <span class=p>@{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c>#  Name =  &#34;$FirstName $LastName&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>Path</span> <span class=p>=</span>  <span class=nv>$addn</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>SamAccountName</span> <span class=p>=</span>  <span class=nv>$Alias</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>UserPrincipalName</span> <span class=p>=</span> <span class=nv>$emailaddr</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>DisplayName</span> <span class=p>=</span> <span class=s2>&#34;$DispName&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>EmailAddress</span> <span class=p>=</span>  <span class=nv>$emailaddr</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>OtherAttributes</span> <span class=p>=</span> <span class=p>@{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=n>ProxyAddresses</span> <span class=p>=</span> <span class=nv>$smtprox</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=nv>$true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$currentuser</span>  <span class=p>=</span>  <span class=nb>Get-ADUser</span>  <span class=n>-Identity</span>  <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>SamAccountName</span> <span class=n>-ErrorAction</span>  <span class=n>SilentlyContinue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=p>(</span><span class=nv>$currentuser</span><span class=p>.</span><span class=n>SamAccountName</span> <span class=o>-eq</span> <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>SamAccountName</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nb>Invoke-Command</span>  <span class=n>-ComputerName</span>  <span class=s2>&#34;DC-where-adsync-installed-here&#34;</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span><span class=nb>Start-Service</span>  <span class=n>-Name</span>  <span class=n>ADSync</span><span class=p>};</span> <span class=nb>Write-Host</span>  <span class=s2>&#34;A User Name Requested already Exist: $Alias \- Please Fix and try again&#34;</span><span class=p>;</span><span class=nb>Disconnect-ExchangeOnline</span><span class=p>;</span><span class=nb>sleep </span> <span class=n>3</span><span class=p>;</span><span class=n>exit</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nb>Write-Host</span> <span class=s2>&#34;Continue..&#34;</span> <span class=n>-ErrorAction</span> <span class=n>SilentlyContinue</span><span class=p>;</span><span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Invoke-Command</span>  <span class=n>-ComputerName</span>  <span class=s2>&#34;DC-where-adsync-installed-here&#34;</span>  <span class=n>-ArgumentList</span>  <span class=nv>$ADUserProperties</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>param</span><span class=p>(</span><span class=nv>$ADUserProperties</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$ADUser</span>  <span class=p>=</span>  <span class=nb>New-ADUser</span>  <span class=nv>@ADUserProperties</span>  <span class=n>-PassThru</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$exsession</span>  <span class=p>=</span>  <span class=nb>New-PSSession</span>  <span class=n>-ConfigurationName</span>  <span class=n>Microsoft</span><span class=p>.</span><span class=n>Exchange</span>  <span class=n>-ConnectionUri</span>  <span class=n>http</span><span class=err>:</span><span class=p>//</span><span class=s2>&#34;on-prem-mail-srv-here&#34;</span><span class=p>/</span><span class=n>PowerShell</span><span class=p>/</span>  <span class=n>-Authentication</span>  <span class=n>Kerberos</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Import-PSSession</span>  <span class=nv>$exsession</span>  <span class=n>-DisableNameChecking</span>  <span class=n>-WarningAction</span>  <span class=n>SilentlyContinue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$mailboxaddr</span>  <span class=p>=</span>  <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>SamAccountName</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Invoke-Command</span>  <span class=n>-ArgumentList</span>  <span class=nv>$mailboxaddr</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>param</span><span class=p>(</span><span class=nv>$mailboxaddr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Enable-RemoteMailbox</span>  <span class=n>-Shared</span>  <span class=nv>$mailboxaddr</span>  <span class=n>-RemoteRoutingAddress</span>  <span class=s2>&#34;$mailboxaddr@creativegroupinc2.mail.onmicrosoft.com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Remove-PSSession</span>  <span class=nv>$exsession</span>  <span class=n>-Confirm</span><span class=err>:</span><span class=nv>$false</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Invoke-Command</span>  <span class=n>-ComputerName</span>  <span class=s2>&#34;DC-where-adsync-installed-here&#34;</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span><span class=nb>Start-Service</span>  <span class=n>-Name</span>  <span class=n>ADSync</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Invoke-Command</span>  <span class=n>-ComputerName</span>  <span class=s2>&#34;DC-where-adsync-installed-here&#34;</span>  <span class=n>-ScriptBlock</span> <span class=p>{</span><span class=nb>Start-ADSyncSyncCycle</span>  <span class=n>-PolicyType</span>  <span class=n>Initial</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=nv>$true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$ADUser</span>  <span class=p>=</span>  <span class=nb>Get-MsolUser</span>  <span class=n>-UserPrincipalName</span>  <span class=nv>$emailaddr</span>  <span class=n>-ErrorAction</span>  <span class=n>SilentlyContinue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=p>(</span><span class=nv>$ADUser</span><span class=p>.</span><span class=n>UserPrincipalName</span> <span class=o>-eq</span> <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>EmailAddress</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nb>Start-Sleep</span>  <span class=n>-Seconds</span>  <span class=n>10</span><span class=p>;</span><span class=nb>Write-warning</span>  <span class=s2>&#34;Waiting on User Sync To Finish....!&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=p>(</span><span class=nv>$true</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$EXMBOX</span> <span class=p>=</span> <span class=nb>Get-mailbox</span> <span class=n>-Identity</span> <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>SamAccountName</span> <span class=n>-ErrorAction</span> <span class=n>SilentlyContinue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>if</span> <span class=p>(</span><span class=nv>$EXMBOX</span><span class=p>.</span><span class=k>Alias</span> <span class=o>-eq</span> <span class=nv>$ADUserProperties</span><span class=p>.</span><span class=n>SamAccountName</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>break</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nb>Start-Sleep</span>  <span class=n>-Seconds</span>  <span class=n>10</span><span class=p>;</span><span class=nb>Write-warning</span>  <span class=s2>&#34;Waiting on Mailbox Sync To Finish....!&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Set-Mailbox</span>  <span class=nv>$ADUser</span><span class=p>.</span><span class=n>UserPrincipalName</span> <span class=n>-MessageCopyForSentAsEnabled</span>  <span class=nv>$True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Set-Mailbox</span>  <span class=nv>$ADUser</span><span class=p>.</span><span class=n>UserPrincipalName</span> <span class=n>-MessageCopyForSendOnBehalfEnabled</span>  <span class=nv>$True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>foreach</span><span class=p>(</span><span class=nv>$mbm</span>  <span class=k>in</span>  <span class=nv>$MboxMembers</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$mbmu</span>  <span class=p>=</span>  <span class=nb>Get-ADUser</span>  <span class=n>-Filter</span>  <span class=p>*</span>  <span class=p>|</span>  <span class=nb>where-object</span><span class=p>{</span><span class=nv>$_</span><span class=p>.</span><span class=n>Name</span> <span class=o>-eq</span>  <span class=nv>$mbm</span><span class=p>}</span> <span class=p>|</span>  <span class=nb>select </span> <span class=n>UserPrincipalName</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$mbmupn</span>  <span class=p>=</span>  <span class=nv>$mbmu</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$upnname</span><span class=p>=</span><span class=nv>$mbmupn</span><span class=p>.</span><span class=n>UserPrincipalName</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nv>$upnname</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=nb>Add-MailboxPermission</span>  <span class=n>-Identity</span>  <span class=n>TestShare</span>  <span class=n>-User</span>  <span class=nv>$upnname</span>  <span class=n>-AccessRights</span>  <span class=n>FullAccess</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Remove-Item</span>  <span class=n>-Path</span>  <span class=nv>$PATH</span><span class=p>\</span><span class=nv>$nurcsv</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>Disconnect-ExchangeOnline</span>  <span class=n>-Confirm</span><span class=err>:</span><span class=nv>$false</span>
+</span></span></code></pre></td></tr></table></div></div></article><hr><div class=page-end><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li><a href=/Doc0x// data-ctx="Create SharedInbox via PowerAutomate" data-src=/ class=internal-link>🪄</a></li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://0xmdk.github.io/Doc0x/js/graph.afdb02e537635f9a611b53a988e5645b.js></script></div></div><div id=contact_buttons><footer><p>Made by 0xMdk using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2022</p><ul><li><a href=https://0xmdk.github.io/Doc0x/>Home</a></li><li><a href=https://twitter.com/>Twitter</a></li><li><a href=https://github.com/0xmdk>Github</a></li></ul></footer></div></div></body></html>
